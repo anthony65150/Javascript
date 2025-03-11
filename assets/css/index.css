@@ -1,3 +1,16 @@
-body{
-    background-color: bisque;
+.carre{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+
+.rond{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: red;
+}
+p{
+    color: white;
+    text-align: center;
 }

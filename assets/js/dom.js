@@ -34,3 +34,12 @@ nouveauParagraphe.textContent = "paragraphe rajouté dynamiquement";
 nouveauParagraphe.className = "nouveau";
 editerMoi.appendChild(nouveauParagraphe);
 nouveauParagraphe.style.color = "blue";
+
+
+//manipulation des classes
+
+//element.classList.add('classe');      ajouter une classe
+//element.classList.remove('classe');   supprimer une classe
+//element.classList.toggle('classe');   basculer une classe
+//element.classList.contains('classe'); verifier si une classe existe
+
