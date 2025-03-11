@@ -23,9 +23,14 @@ let changerParagraphe = document.querySelector('.texte');
 changerParagraphe.textContent = "nouveau texte modifié";
 
 //2-----modifier la valeur de l'input
-
+let changerInput = document.getElementById("monInput");
+changerInput.value = "nouvelle valeur dans le input!!";
 
 
 //3----ajouter un nouveau paragraphe avec le HTML
-
-
+//version securisée
+const nouveauParagraphe = document.createElement("p");
+nouveauParagraphe.textContent = "paragraphe rajouté dynamiquement";
+nouveauParagraphe.className = "nouveau";
+editerMoi.appendChild(nouveauParagraphe);
+nouveauParagraphe.style.color = "blue";
