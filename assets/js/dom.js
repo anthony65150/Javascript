@@ -82,3 +82,48 @@ box.addEventListener("click", function(){
 
 
 
+//creer variables liste et bouton ajout
+let liste = document.getElementById("items");
+let boutonAjout = document.getElementById("ajout");
+let compteur = 1;
+
+//fonction pour ajouter un element
+
+function ajoutElement (){
+    //creer les elements
+    let li = document.createElement("li");
+    let texte = document.createElement("span");
+    let boutonSupp = document.createElement("button");
+
+    //configurer le contenu
+    li.classList.add("essai")
+    texte.textContent = `Element ${compteur}`;
+    boutonSupp.textContent = "supprimer";
+
+    //ajouter du style
+    li.style.display = "flex";
+    li.style.justifyContent = "space-between";
+    li.style.margin = "5px 0";
+    boutonSupp.style.marginLeft = "10px";
+
+    //ajouter bouton de suppression
+    boutonSupp.onclick = function(){
+        //implementer la suppression
+        li.remove();
+        compteur--;
+
+    };
+
+    //assembler les elemnets et ajouter a la liste
+    li.appendChild(texte);
+    li.appendChild(boutonSupp);
+    liste.appendChild(li);
+
+
+    compteur++;
+
+}
+
+//attacher evenement au boutton
+
+boutonAjout.addEventListener("click", ajoutElement);

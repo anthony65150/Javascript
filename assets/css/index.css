@@ -14,3 +14,11 @@ p{
     color: white;
     text-align: center;
 }
+.essai{
+    background-color: beige;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+
+}
