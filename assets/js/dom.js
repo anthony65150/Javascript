@@ -83,7 +83,7 @@ box.addEventListener("click", function(){
 
 
 //creer variables liste et bouton ajout
-let liste = document.getElementById("items");
+/*let liste = document.getElementById("items");
 let boutonAjout = document.getElementById("ajout");
 let compteur = 1;
 
@@ -126,4 +126,59 @@ function ajoutElement (){
 
 //attacher evenement au boutton
 
-boutonAjout.addEventListener("click", ajoutElement);
+boutonAjout.addEventListener("click", ajoutElement);*/
+
+//gestions des evenements
+//click
+//submit
+//keyup/keydown
+//mouseover/mouseout
+//change
+
+
+//exercice
+//1. empecher le comportement par defaut du formulaire
+//2. afficher le texte saisi en temps reel
+//3.valider le contenu avant soumission
+
+
+//pseudo-code:
+//selectionner les elements necessaires
+//formulaire = selectionner element avec un id ("monFormulaire")
+//champNom = selectionner element avec un id ("monInput")
+//resultat = selectionner element avec un id ("resultat")
+
+let monFormulaire = document.getElementById ("monFormulaire");
+let champNom = document.getElementById ("monInput");
+let resultat = document.getElementById ("resultat"); 
+
+//1. empecher le comportement par defaut du formulaire
+//ajouter un ecouteur submit a mon formulaire
+monFormulaire.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    //3.valider le contenu avant soumission
+    if(champNom.value.trim() === ""){
+        resultat.textContent = "Rentrez un nom svp...";
+        resultat.style.color = "red";
+        return;
+    }
+    else{
+        resultat.textContent = `Nom : ${champNom.value}`;
+        resultat.style.color = "green";
+        monFormulaire.reset();
+    }
+});
+
+//2. afficher le texte saisi en temps reel
+champNom.addEventListener("input", function(){
+    if(this.value.trim() === ""){
+        resultat.textContent = "En attente de saisi....";
+        resultat.style.color = "gray";
+    }
+    else{
+        resultat.textContent = `Vous tapez : ${this.value}`;
+        resultat.style.color = "blue";
+    }
+});
+
