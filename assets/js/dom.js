@@ -136,7 +136,7 @@ boutonAjout.addEventListener("click", ajoutElement);*/
 //change
 
 
-//exercice
+//exercice------------------------------------------------------------------------
 //1. empecher le comportement par defaut du formulaire
 //2. afficher le texte saisi en temps reel
 //3.valider le contenu avant soumission
@@ -148,7 +148,7 @@ boutonAjout.addEventListener("click", ajoutElement);*/
 //champNom = selectionner element avec un id ("monInput")
 //resultat = selectionner element avec un id ("resultat")
 
-let monFormulaire = document.getElementById ("monFormulaire");
+/*let monFormulaire = document.getElementById ("monFormulaire");
 let champNom = document.getElementById ("monInput");
 let resultat = document.getElementById ("resultat"); 
 
@@ -180,5 +180,63 @@ champNom.addEventListener("input", function(){
         resultat.textContent = `Vous tapez : ${this.value}`;
         resultat.style.color = "blue";
     }
+});*/
+
+
+//mettre une bordure rouge sur l'input si aucun champ n'est ecrit
+//mettre une bordure verte sur l'input si un champ est ecrit
+
+//je recupere mes elements:
+/*let monFormulaire = document.getElementById("monFormulaire");
+let inputName = document.getElementById("inputName");
+
+//mise en place d'un ecouteur submit et d'une condition pour les bordures
+
+monFormulaire.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    if(inputName.value.trim()===""){
+        inputName.style.border = "solid 3px red";
+    }
+
+    else {
+        inputName.style.border = "solid 3px green";
+    }
+    monFormulaire.reset();
 });
 
+//mise en place bordure saisi en temps reel
+monFormulaire.addEventListener("input", function(){
+    if(inputName.value.trim() ===""){
+        inputName.style.border = "solid 3px gray";
+    }
+    else{
+        inputName.style.border = "solid 3px blue";
+    }
+});*/
+
+
+//attendre que le DOM soit completement chargé
+document.activeElement('DOMContentLoaded', function(){
+
+
+
+    // ===== PROTECTION CONTRE LES ATTAQUES XSS =====
+    // La fonction escapeHtml convertit les caractères spéciaux en entités HTML
+    // Cela empêche l'injection de code malveillant (attaques XSS)
+    // Par exemple: "<script>" devient "&lt script &gt" et ne sera pas exécuté comme du code
+    
+    function escapeHtml(unsafe){
+        return unsafe
+        .replace(/&/g, "&amp;") // Remplace & par &amp
+        .replace(/</g, "&lt;")    // Remplace < par &lt
+        .replace(/>/g, "&gt;")    // Remplace > par &gt
+        .replace(/"/g, "&quot;") // Remplace " par &quot
+        .replace(/'/g, "&#039;"); // Remplace ' par &#039
+    }
+
+    //=============VALIDATION DU FORMULAIRE============
+    //cette fonction verifie si tous les champs du formulaire sont remplis
+
+    
+});
