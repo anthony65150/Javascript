@@ -22,3 +22,6 @@ p{
     text-align: center;
 
 }
+#successMessage{
+    display: none;
+}

@@ -217,7 +217,7 @@ monFormulaire.addEventListener("input", function(){
 
 
 //attendre que le DOM soit completement chargé
-document.activeElement('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function(){
 
 
 
@@ -237,6 +237,93 @@ document.activeElement('DOMContentLoaded', function(){
 
     //=============VALIDATION DU FORMULAIRE============
     //cette fonction verifie si tous les champs du formulaire sont remplis
+    function checkForm(){
+        //selectionner tout les champs du formulaire (inputs et textareas)
+        const inputs = document.querySelectorAll('#monFormulaire input, #monFormulaire textarea');
+        let formIsValid = true;
 
-    
+        //parcourt chaque champ pour voir s'il est vide
+        inputs.forEach(input =>{                                //forEach = parcourt chaque input
+            //trim() enleve les espace au debut et a la fin du texte
+            if(input.value.trim() === ''){
+                //si le champ saisi est vide alors on met la bordure en rouge
+                input.style.border = '2px solid red';
+                formIsValid = false;
+            }
+            else{
+                //si le champ est rempli on rajoute une bordure verte
+                input.style.border = '2px solid green';
+            }
+        });
+        //retourne true si tous les champs sont remplis, sinon false
+        return formIsValid;
+    }
+
+    //======================PREPARATION DES DONNEES POUR LE BACKEND=====================
+    //cette fonction recupere les valeurs du formulaire et les securise contre les attaques XSS
+
+    function prepareDataForBackend (){
+        //selectionner tout les champs du formulaire (inputs et textareas)
+        const formElements = document.querySelectorAll('#monFormulaire input, #monFormulaire textarea');
+        //creer un objet vide pour stocker les donnees
+        const sanitizedData = {};
+
+
+        //parcourt chaque champ du formulaire
+        formElements.forEach(input =>{
+            if(input.name){
+                //pour chaque champ on ajoute sa valeur securisé a l'objet
+                //la clé est le nom du champ (name), la valeur est le contenu securisé
+                sanitizedData[input.name] = escapeHtml(input.value);
+
+            }
+        });
+        //retourne l'objet des données securisées
+        return sanitizedData;
+
+    }
+
+        //GESTION DE LA SOUMISSION DU FORMULAIRE
+        //recupere le formulaire par son id
+        const form = document.getElementById('monFormulaire');
+
+        if(form){
+            //ajouter ecouteur d'evenement sur la soumission du formulaire
+            form.addEventListener('submit', function(event){
+                //empeche le comportement par defaut (rechargement de page)
+                event.preventDefault();
+
+
+                //verifier si le formulaire est valide,si tous les champs sont remplis
+                if(!checkForm()){
+                    alert('Veuillez remplir tous les champs du formulaire...');
+                    return;
+                }
+
+                //si le formulaire est valide preparé les données securisées
+                const sanitizedData = prepareDataForBackend();
+
+                //afficher les données dans la console ,dans un cas reel on enverrai sur un serveur
+                console.log('données pretent a etre envoyées aux backend', sanitizedData);
+                
+                //JE RESET MON FORMULAIRE   
+                monFormulaire.reset();
+
+                //==================AFFICHAGE DU MESSAGE DE SUCCESS===========================
+                //recupere les elements necessaires
+                const form = document.getElementById("monFormulaire");
+                const success = document.getElementById("successMessage");
+
+                //cache le formulaire et affiche le message de success
+                if(form && success){
+                    form.style.display = "none";
+                    success.style.display = "block";
+                }
+            });
+            
+        }
+
+        //===================VALIDATION EN TEMPS REEL===================
+        
+        
 });
